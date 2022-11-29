@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
+)
 
 //Multiplication of variables
 func Multi(x, y int) (half int) {
@@ -57,10 +61,33 @@ func Fact(n int) int {
 	return res
 }
 
+func PrintAllFiles(path string) {
+	// получаем список всех элементов в папке (и файлов, и директорий)
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		fmt.Println("unable to get list of files", err)
+		return
+	}
+	//  проходим по списку
+	for _, f := range files {
+		// получаем имя элемента
+		// filepath.Join — функция, которая собирает путь к элементу с разделителями
+		filename := filepath.Join(path, f.Name())
+		// печатаем имя элемента
+		fmt.Println(filename)
+		// если элемент — директория, то вызываем для него рекурсивно ту же функцию
+		if f.IsDir() {
+			PrintAllFiles(filename)
+		}
+	}
+}
+
 func main() {
-	var x int
+	/*var x int
 	fmt.Println("Введите число")
 	fmt.Scanf("%d\n", &x)
 	y := Fib(x)
 	fmt.Println(y)
+	*/
+	PrintAllFiles("Yandex courses")
 }
