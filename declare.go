@@ -89,5 +89,5 @@ func main() {
 	y := Fib(x)
 	fmt.Println(y)
 	*/
-	PrintAllFiles("Yandex courses")
+	PrintAllFiles(".")
 }
